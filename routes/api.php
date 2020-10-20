@@ -20,7 +20,7 @@ Route::group(['prefix' => 'admin'], function() {
 
         Route::middleware('auth:admin_api')->group(function(){
             Route::post('password/change', 'AuthController@changePassword');
-            Route::post('home', 'AuthController@home');
+            Route::get('home', 'AuthController@home');
         });
     });
 });
@@ -30,6 +30,6 @@ Route::namespace('\App\Http\Controllers\Api')->group(function(){
     Route::post('reset', 'ResetPasswordController@sendResetLinkEmail');
     Route::middleware('auth:api')->group(function(){
         Route::post('password/change', 'AuthController@changePassword');
-        Route::post('home', 'AuthController@home');
+        Route::get('home', 'AuthController@home');
     });
 });
