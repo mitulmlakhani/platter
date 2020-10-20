@@ -71,17 +71,8 @@ class AuthController extends BaseApiController
         return $this->respondWithToken(auth($this->guard)->refresh());
     }
 
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function respondWithToken($token)
+    public function home()
     {
-        // return Self::sendResponse(['name' => $web->name, 'email' => $auth->email, 'token' => $token], 'Login Success');
-        // }
-        // return Self::sendError(new \StdClass(), 'Invalid Username and password.', 400);
+        return Self::sendResponse([], 'Hello World !');
     }
 }

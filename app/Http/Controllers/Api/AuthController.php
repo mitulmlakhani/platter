@@ -32,4 +32,9 @@ class AuthController extends BaseApiController
         return Self::sendResponse([], 'Password changed successfully.');
     }
 
+    public function home()
+    {
+        return Self::sendResponse([], 'Hello World !');
+    }
+
 }
