@@ -18,12 +18,12 @@ Route::get('/', function () {
 });
 
 Route::middleware('guest:web')->group(function() {
-Auth::routes(['register' => false]);
+    Auth::routes(['register' => false, 'logout' => false]);
 });
 
 Route::middleware('auth:web')->group(function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+    Route::post('logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');
     Route::get('password/change', 'App\Http\Controllers\ProfileController@showChangePassword')->name('password.change');
     Route::post('password/change', 'App\Http\Controllers\ProfileController@changePassword')->name('password.save');
 });
