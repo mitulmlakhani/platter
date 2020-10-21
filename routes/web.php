@@ -17,9 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::middleware('guest:web')->group(function() {
 Auth::routes(['register' => false]);
+});
 
-Route::middleware('auth')->group(function() {
+Route::middleware('auth:web')->group(function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::get('password/change', 'App\Http\Controllers\ProfileController@showChangePassword')->name('password.change');
