@@ -134,6 +134,8 @@ return [
     |
     */
 
+    'log_api_requests' => env('ENABLE_API_LOGS', true),
+
     'providers' => [
 
         /*

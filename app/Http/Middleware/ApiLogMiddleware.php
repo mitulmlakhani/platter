@@ -17,14 +17,17 @@ class ApiLogMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        ApiLog::info(json_encode([
-            'url' => $request->fullUrl(),
-            'method' => $request->method(),
-            'headers' => $request->header(),
-            'body' => $request->all(),
-            'ip' => $request->ip(),
-            'created_at' => time()
-        ]), 'apilogs');
+
+        if(config('app.log_api_requests')) {
+            ApiLog::info(json_encode([
+                'url' => $request->fullUrl(),
+                'method' => $request->method(),
+                'headers' => $request->header(),
+                'body' => $request->all(),
+                'ip' => $request->ip(),
+                'created_at' => time()
+            ]), 'apilogs');
+        }
 
         return $next($request);
     }
