@@ -36,7 +36,7 @@ class ApiLog extends Facade
         $file = isset($args[1]) ? $args[1] : 'laravel';
 
         // Maximum number of lines in one log file
-        $max = 10000;
+        $max = config('api_log_lines', 10000);
 
         // Get Monolog Instance
         $logger = Log::getLogger();

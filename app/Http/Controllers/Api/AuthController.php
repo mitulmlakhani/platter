@@ -19,7 +19,8 @@ class AuthController extends BaseApiController
     public function login(Request $request){
         if($this->attemptLogin($request)){
             $web = Auth::guard('web')->user();
-            return Self::sendResponse(['name' => $web->name, 'email' => $web->email, 'token' => $web->createToken('SAMARTH')->accessToken], 'Login Success');
+            $token = $web->createToken($web->email.'-'.now(), [$web->role])->accessToken;
+            return Self::sendResponse(['name' => $web->name, 'email' => $web->email, 'token' => $token], 'Login Success');
         }
         return Self::sendError(new \StdClass(), 'Invalid Username and password.', 400);
     }
@@ -34,7 +35,11 @@ class AuthController extends BaseApiController
 
     public function home()
     {
-        return Self::sendResponse([], 'Hello World !');
+        return Self::sendResponse(['role' => auth()->user()->role], 'Hello World !');
     }
 
+    public function checkRole()
+    {
+        dd(auth()->user()->role);
+    }
 }

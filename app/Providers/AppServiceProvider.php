@@ -28,5 +28,15 @@ class AppServiceProvider extends ServiceProvider
         //
         Schema::defaultStringLength(191);
         Passport::tokensExpireIn(now()->addMinutes(env('AUTH2_EXPIRY_TIME')));
+
+        // Mandatory to define Scope
+        Passport::tokensCan([
+            'full' => 'Full Access Role',
+            'basic' => 'Basic Access Role'
+        ]);
+
+        Passport::setDefaultScope([
+            'basic'
+        ]);
     }
 }

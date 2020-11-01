@@ -30,6 +30,13 @@ Route::namespace('\App\Http\Controllers\Api')->group(function(){
     Route::post('reset', 'ResetPasswordController@sendResetLinkEmail');
     Route::middleware('auth:api')->group(function(){
         Route::post('password/change', 'AuthController@changePassword');
+    });
+
+    Route::middleware(['auth:api', 'scope:basic'])->group(function(){
         Route::get('home', 'AuthController@home');
+        Route::get('checkRole', 'AuthController@checkRole');
+    });
+
+    Route::middleware(['auth:api', 'scope:full'])->group(function(){
     });
 });

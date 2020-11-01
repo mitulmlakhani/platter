@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Laravel\Passport\Exceptions\MissingScopeException;
 
 class Handler extends ExceptionHandler
 {
@@ -33,5 +34,16 @@ class Handler extends ExceptionHandler
     public function register()
     {
         //
+    }
+
+    public function render($request, \Throwable $exception)
+    {
+        if ($exception instanceof MissingScopeException && $request->wantsJson()){
+            return response()->json([
+                'success' => false,
+                'errors' => [],
+                'message' => 'Unauthorized',
+            ], 403);
+        }
     }
 }

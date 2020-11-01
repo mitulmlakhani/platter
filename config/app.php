@@ -135,6 +135,7 @@ return [
     */
 
     'log_api_requests' => env('ENABLE_API_LOGS', true),
+    'api_log_lines' => env('API_LOG_FILE_LINE', 10000),
 
     'providers' => [
 
